@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ReynoCalc – Reynolds Number Calculator</title>
+  <style>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+  body {
+    background-color: #f3e8ff;
+    color: #1e1e1e;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  h1 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #dc2626;
+  }
+
+  label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: 500;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    background-color: #f9fafb;
+    color: #1e1e1e;
+    margin-bottom: 15px;
+    transition: border 0.2s;
+  }
+
+  input:focus {
+    border-color: #7c3aed;
+    outline: none;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #dc2626;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  button:hover {
+    background-color: #b91c1c;
+  }
+
+  #result {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #7c3aed;
+  }
+</style>
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ReynoCalc</h1>
+    <label for="rho">Density (ρ) [kg/m³]</label>
+    <input type="number" id="rho" placeholder="Enter density">
+
+    <label for="velocity">Velocity (V) [m/s]</label>
+    <input type="number" id="velocity" placeholder="Enter velocity">
+
+    <label for="length">Length (L) [m]</label>
+    <input type="number" id="length" placeholder="Enter length">
+
+    <label for="mu">Viscosity (μ) [Pa·s]</label>
+    <input type="number" id="mu" placeholder="Enter viscosity">
+
+    <button onclick="calculateRe()">Calculate Reynolds Number</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateRe() {
+      const rho = parseFloat(document.getElementById("rho").value);
+      const v = parseFloat(document.getElementById("velocity").value);
+      const l = parseFloat(document.getElementById("length").value);
+      const mu = parseFloat(document.getElementById("mu").value);
+
+      if (isNaN(rho) || isNaN(v) || isNaN(l) || isNaN(mu) || mu === 0) {
+        document.getElementById("result").textContent = "Please enter valid non-zero inputs.";
+        return;
+      }
+
+      const Re = (rho * v * l) / mu;
+      document.getElementById("result").textContent = `Reynolds Number: ${Re.toExponential(2)}`;
+    }
+  </script>
+</body>
+</html>
